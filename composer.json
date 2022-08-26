@@ -1,0 +1,59 @@
+{
+    "name": "pluginwp/pluginwp",
+    "description": "",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-only",
+    "authors": [
+        {
+            "name": "Plugin Author",
+            "homepage": "https://pluginwp.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PluginWP\\": "includes"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "illuminate/container": "^8.83"
+    },
+    "require-dev": {
+        "coenjacobs/mozart": "^0.7.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
+        "johnpbloch/wordpress-core": "^6.0",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "wp-coding-standards/wpcs": "^2.3",
+        "wp-phpunit/wp-phpunit": "^6.0",
+        "yoast/phpunit-polyfills": "^1.0"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "mozart": {
+            "dep_namespace": "PluginWP\\Dependencies\\",
+            "dep_directory": "/includes/Dependencies/",
+            "classmap_directory": "/includes/classes/dependencies/",
+            "classmap_prefix": "PWP_"
+        }
+    },
+    "scripts": {
+        "lint": "@php ./vendor/bin/phpcs",
+        "lint:fix": "@php ./vendor/bin/phpcbf",
+        "test": "@php ./vendor/bin/phpunit",
+        "mozart-compose": [
+            "\"vendor/bin/mozart\" compose",
+            "composer dump-autoload",
+            "@php -r \"copy('https://raw.githubusercontent.com/php-fig/container/master/LICENSE', 'includes/Dependencies/Psr/Container/LICENSE');\"",
+            "find ./includes/Dependencies/Illuminate -type d ! -name Illuminate ! -name Contracts ! -name Container -exec rm -rf {} 2> /dev/null \\; || true",
+            "find ./includes/Dependencies/Psr -type d ! -name Psr ! -name Container -exec rm -rf {} 2> /dev/null \\; || true"
+        ]
+    }
+}
