@@ -7,6 +7,7 @@
 		"lint-js": "wp-scripts lint-js",
 		"lint-php": "wp-env run composer run-script lint",
 		"packages-update": "wp-scripts packages-update --dist-tag=wp-6.0",
+		"pretest:php": "wp-env start",
 		"test:php": "wp-env run phpunit 'phpunit -c /var/www/html/wp-content/plugins/pluginwp/phpunit.xml.dist --verbose'",
 		"postpackages-update": "npm run build",
 		"prelint-php": "wp-env run composer \"install --no-interaction\"",
