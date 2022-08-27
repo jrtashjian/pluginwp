@@ -133,7 +133,8 @@ class Application extends Container {
 	 * @return ServiceProvider
 	 */
 	public function register( $provider, $force = false ) {
-		if ( ( $registered = $this->getProvider( $provider ) ) && ! $force ) {
+		$registered = $this->getProvider( $provider );
+		if ( $registered && ! $force ) {
 			return $registered;
 		}
 

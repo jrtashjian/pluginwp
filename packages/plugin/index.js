@@ -13,10 +13,9 @@ import './style.scss';
 /**
  * Initializes and returns and instance of PluginWP.
  *
- * @param {string}  id       Unique identifier for the editor instance.
- * @param {?Object} settings Settings object.
+ * @param {string} id Unique identifier for the editor instance.
  */
-export function initialize( id, settings ) {
+export function initialize( id ) {
 	const target = document.getElementById( id );
 	render( <App />, target );
 }
