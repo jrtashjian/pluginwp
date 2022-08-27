@@ -7,10 +7,13 @@ import {
 	SlotFillProvider,
 } from '@wordpress/components';
 
-export default function App() {
+export default function App( { settings } ) {
 	return (
 		<SlotFillProvider>
 			{ __( 'PluginWP' ) }
+			<pre>
+				{ JSON.stringify( settings, null, 2 ) }
+			</pre>
 			<Popover.Slot />
 		</SlotFillProvider>
 	);

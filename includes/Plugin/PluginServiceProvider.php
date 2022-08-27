@@ -65,9 +65,9 @@ class PluginServiceProvider extends ServiceProvider {
 
 		$init_script = <<<JS
 		( function() {
-			window._pluginwpLoad = new Promise( function( resolve ) {
+			window._loadPluginWP = new Promise( function( resolve ) {
 				wp.domReady( function() {
-					resolve( pluginwp.plugin.initialize( 'pluginwp', "%s" ) );
+					resolve( pluginwp.plugin.initialize( 'pluginwp', %s ) );
 				} );
 			} );
 		} )();
