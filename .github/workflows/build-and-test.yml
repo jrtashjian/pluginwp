@@ -11,6 +11,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Restore npm dependency cache
+        uses: .github/actions/restore-npm-cache
+
+      - name: Restore composer dependency cache
+        uses: .github/actions/restore-composer-cache
+
       - name: Install node dependencies
         run: npm install
 
