@@ -1,0 +1,27 @@
+name: Build and Test
+
+on: push
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install node dependencies
+        run: npm install
+
+      - name: Install composer dependencies
+        run: composer install
+
+      - name: Build the plugin
+        run: npm run build
+
+      - name: Save compiled assets
+        uses: actions/upload-artifact@v2
+        with:
+          name: plugin-build-dir
+          path: ./build
