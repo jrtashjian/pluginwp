@@ -29,7 +29,7 @@
 
 	<!-- Check for PHP cross-version compatibility. -->
 	<config name="testVersion" value="7.4-"/>
-	<rule ref="PHPCompatibilityWP"/>
+	<rule ref="PHPCompatibilityWP" />
 
 	<rule ref="WordPress.WP.I18n">
 		<properties>
