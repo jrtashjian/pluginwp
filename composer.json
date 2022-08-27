@@ -39,7 +39,7 @@
             "dep_namespace": "PluginWP\\Dependencies\\",
             "dep_directory": "/includes/Dependencies/",
             "classmap_directory": "/includes/classes/dependencies/",
-            "classmap_prefix": "PWP_"
+            "classmap_prefix": "PluginWP_"
         }
     },
     "scripts": {

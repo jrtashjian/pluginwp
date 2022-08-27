@@ -26,8 +26,6 @@ Replace the following strings within the `includes/`, `packages/`, and `phpunit/
 | `PluginWP Author` | `Actual Author Name` |
 | `PluginWP`        | `YourPluginSlug`     |
 | `pluginwp`        | `yourpluginslug`     |
-| `pwp`             | `yps`                |
-| `PWP`             | `YPS`                |
 
 You should also rename the main plugin file `pluginwp.php` to `yourpluginslug.php`.
 

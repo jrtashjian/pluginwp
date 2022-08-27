@@ -43,7 +43,6 @@
 		<properties>
 			<property name="prefixes" type="array">
 				<element value="pluginwp"/>
-				<element value="pwp"/>
 			</property>
 		</properties>
 	</rule>
