@@ -1,7 +1,6 @@
 {
     "name": "pluginwp/pluginwp",
     "description": "",
-    "type": "wordpress-plugin",
     "license": "GPL-2.0-only",
     "authors": [
         {
@@ -15,7 +14,6 @@
         }
     },
     "require": {
-        "php": ">=7.4",
         "illuminate/container": "^8.83"
     },
     "require-dev": {
@@ -45,9 +43,9 @@
         }
     },
     "scripts": {
-        "lint": "@php ./vendor/bin/phpcs",
-        "lint:fix": "@php ./vendor/bin/phpcbf",
-        "test": "@php ./vendor/bin/phpunit",
+        "lint": "phpcs --standard=phpcs.xml.dist",
+        "format": "phpcbf --standard=phpcs.xml.dist --report-summary --report-source",
+        "test": "phpunit",
         "mozart-compose": [
             "\"vendor/bin/mozart\" compose",
             "composer dump-autoload",

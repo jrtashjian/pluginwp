@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "087710d40583bef2e306d974b7d669a0",
+    "content-hash": "18f8282a46bc72c04009bb8eedfdcb4f",
     "packages": [
         {
             "name": "illuminate/container",
@@ -3547,9 +3547,7 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "php": ">=7.4"
-    },
+    "platform": [],
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.4"
