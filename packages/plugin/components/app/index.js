@@ -6,6 +6,7 @@ import {
 	Popover,
 	SlotFillProvider,
 } from '@wordpress/components';
+import { PluginArea } from '@wordpress/plugins';
 import {
 	FullscreenMode,
 	InterfaceSkeleton,
@@ -25,6 +26,7 @@ export default function App( { settings } ) {
 					</div>
 				) }
 			/>
+			<PluginArea scope="pluginwp" onError={ ( name ) => console.debug( name, 'plugin has encountered an error' ) } />
 			<Popover.Slot />
 		</SlotFillProvider>
 	);
