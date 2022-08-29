@@ -12,17 +12,28 @@ import {
 	InterfaceSkeleton,
 } from '@wordpress/interface';
 
+/**
+ * Internal dependencies
+ */
+import ExampleSlotFill from '../example-slot-fill';
+
 export default function App( { settings } ) {
 	return (
 		<SlotFillProvider>
 			<FullscreenMode isActive={ false } />
 			<InterfaceSkeleton
 				content={ (
-					<div>
-						{ __( 'PluginWP' ) }
-						<pre>
+					<div style={ { padding: '1rem' } }>
+						<h1>{ __( 'PluginWP' ) }</h1>
+
+						<pre style={ { margin: '0' } }>
+							{ __( 'Initial Settings' ) }:<br />
 							{ JSON.stringify( settings, null, 2 ) }
 						</pre>
+
+						<pre><strong>&lt;ExampleSlotFill.Slot&gt;</strong> --------------------</pre>
+						<ExampleSlotFill.Slot />
+						<pre><strong>&lt;/ExampleSlotFill.Slot&gt;</strong> --------------------</pre>
 					</div>
 				) }
 			/>
