@@ -9,12 +9,32 @@ namespace PluginWP\Tests\Core;
 
 use PluginWP\Application;
 use PluginWP\ServiceProvider;
-use \PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Core class.
  */
-class CoreTest extends TestCase {
+class CoreTest extends \WP_UnitTestCase {
+	/**
+	 * The full path to the plugin.
+	 *
+	 * @var string
+	 */
+	protected $plugin_path;
+
+	/**
+	 * The full path to the plugin file.
+	 *
+	 * @var string
+	 */
+	protected $plugin_file;
+
+	/**
+	 * This method is called before each test.
+	 */
+	public function set_up() {
+		$this->plugin_path = dirname( dirname( dirname( __FILE__ ) ) );
+		$this->plugin_file = $this->plugin_path . '/' . basename( $this->plugin_path ) . '.php';
+	}
 
 	/**
 	 * Test the correct path bindings are generated.
@@ -25,20 +45,20 @@ class CoreTest extends TestCase {
 		$this->assertEmpty( $application->basePath() );
 		$this->assertEmpty( $application->baseUrl() );
 
-		$application->setBasePath( 'pluginwp/pluginwp.php' );
+		$application->setBasePath( $this->plugin_file );
 
-		$this->assertEquals( 'pluginwp', $application->basePath() );
-		$this->assertEquals( 'http://localhost:8889/wp-content/plugins/pluginwp', $application->baseUrl() );
+		$this->assertEquals( $this->plugin_path, $application->basePath() );
+		$this->assertEquals( site_url( '/wp-content/plugins/' . basename( $this->plugin_path ) ), $application->baseUrl() );
 	}
 
 	/**
 	 * Test the contstructor parameter will generate the correct path bindings.
 	 */
 	public function test_core_constructor_can_register_path_bindings() {
-		$application = new Application( 'pluginwp/pluginwp.php' );
+		$application = new Application( $this->plugin_file );
 
-		$this->assertEquals( 'pluginwp', $application->basePath() );
-		$this->assertEquals( 'http://localhost:8889/wp-content/plugins/pluginwp', $application->baseUrl() );
+		$this->assertEquals( $this->plugin_path, $application->basePath() );
+		$this->assertEquals( site_url( '/wp-content/plugins/' . basename( $this->plugin_path ) ), $application->baseUrl() );
 	}
 
 	/**
@@ -47,7 +67,9 @@ class CoreTest extends TestCase {
 	public function test_core_returns_version() {
 		$application = new Application();
 
-		$this->assertEquals( '1.0.0', $application->version() );
+		$plugin_data = get_plugin_data( $this->plugin_file, false );
+
+		$this->assertEquals( $plugin_data['Version'], $application->version() );
 	}
 
 	/**
@@ -110,7 +132,7 @@ class CoreTest extends TestCase {
 	 * Test that the deactivation hook is called.
 	 */
 	public function test_deactivation_hook_is_called() {
-		$plugin_basename = 'pluginwp/pluginwp/php';
+		$plugin_basename = plugin_basename( $this->plugin_file );
 
 		register_deactivation_hook( $plugin_basename, array( pluginwp()->app, 'deactivation' ) );
 		$this->assertTrue( has_filter( 'deactivate_' . $plugin_basename ) );
@@ -122,7 +144,7 @@ class CoreTest extends TestCase {
 	 * Test that the deactivation hook removes the maintenance job.
 	 */
 	public function test_deactivation_hook_removes_maintenance_job() {
-		$plugin_basename = 'pluginwp/pluginwp/php';
+		$plugin_basename = plugin_basename( $this->plugin_file );
 		$this->assertTrue( has_filter( 'deactivate_' . $plugin_basename ) );
 	}
 }
