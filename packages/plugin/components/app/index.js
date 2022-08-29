@@ -37,7 +37,7 @@ export default function App( { settings } ) {
 					</div>
 				) }
 			/>
-			<PluginArea scope="pluginwp" onError={ ( name ) => console.debug( name, 'plugin has encountered an error' ) } />
+			<PluginArea scope="pluginwp" />
 			<Popover.Slot />
 		</SlotFillProvider>
 	);
