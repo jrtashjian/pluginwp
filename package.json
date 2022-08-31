@@ -15,7 +15,10 @@
 	},
 	"dependencies": {
 		"@pluginwp/plugin": "file:packages/plugin",
+		"@pluginwp/block-library": "file:packages/block-library",
 		"@wordpress/base-styles": "^4.3.1",
+		"@wordpress/block-editor": "^9.8.0",
+		"@wordpress/blocks": "^11.15.0",
 		"@wordpress/components": "^19.8.5",
 		"@wordpress/data": "^6.6.1",
 		"@wordpress/dom-ready": "^3.6.1",
