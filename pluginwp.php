@@ -53,6 +53,7 @@ pluginwp()->setBasePath( __FILE__ );
  * Service Providers.
  */
 pluginwp()->register( \PluginWP\Plugin\PluginServiceProvider::class );
+pluginwp()->register( \PluginWP\BlockLibrary\BlockLibraryServiceProvider::class );
 
 register_deactivation_hook( __FILE__, array( pluginwp(), 'deactivation' ) );
 
