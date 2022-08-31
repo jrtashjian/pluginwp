@@ -30,8 +30,14 @@ class PluginServiceProvider extends ServiceProvider {
 					'pluginwp',
 					function () {
 						?>
-						<div id="pluginwp">
-							PluginWP
+						<div id="pluginwp" class="hide-if-no-js"></div>
+
+						<?php // JavaScript is disabled. ?>
+						<div class="wrap hide-if-js">
+							<h1 class="wp-heading-inline">PluginWP</h1>
+							<div class="notice notice-error notice-alt">
+								<p><?php esc_html_e( 'PluginWP requires JavaScript. Please enable JavaScript in your browser settings.', 'pluginwp' ); ?></p>
+							</div>
 						</div>
 						<?php
 					},
