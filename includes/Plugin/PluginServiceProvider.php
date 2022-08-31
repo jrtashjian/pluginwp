@@ -52,6 +52,12 @@ class PluginServiceProvider extends ServiceProvider {
 			return;
 		}
 
+		// Prevent default hooks rendering content to the page.
+		remove_all_actions( 'network_admin_notices' );
+		remove_all_actions( 'user_admin_notices' );
+		remove_all_actions( 'admin_notices' );
+		remove_all_actions( 'all_admin_notices' );
+
 		$asset_loader = $this->app->makeWith(
 			Asset::class,
 			array(
