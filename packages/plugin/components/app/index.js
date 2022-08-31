@@ -24,10 +24,10 @@ export default function App( { settings } ) {
 			<InterfaceSkeleton
 				content={ (
 					<div style={ { padding: '1rem' } }>
-						<h1>{ __( 'PluginWP' ) }</h1>
+						<h1>{ __( 'PluginWP', 'pluginwp' ) }</h1>
 
 						<pre style={ { margin: '0' } }>
-							{ __( 'Initial Settings' ) }:<br />
+							{ __( 'Initial Settings', 'pluginwp' ) }:<br />
 							{ JSON.stringify( settings, null, 2 ) }
 						</pre>
 
