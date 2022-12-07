@@ -56,11 +56,9 @@ class Asset {
 	 * Set the package name for the asset.
 	 *
 	 * @param string $package_name The package slug.
-	 *
-	 * @return string
 	 */
 	public function setPackageName( $package_name ) {
-		return $this->package = $package_name;
+		$this->package = $package_name;
 	}
 
 	/**
