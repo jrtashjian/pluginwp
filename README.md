@@ -1,3 +1,5 @@
+[![Build and Test](https://github.com/jrtashjian/pluginwp/actions/workflows/build-and-test.yml/badge.svg?branch=master)](https://github.com/jrtashjian/pluginwp/actions/workflows/build-and-test.yml)
+
 # PluginWP Foundation
 
 🚧 [**UNDER DEVELOPMENT**](https://github.com/jrtashjian/pluginwp/issues/1) 🚧
