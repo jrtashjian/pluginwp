@@ -4,7 +4,7 @@
 	"name": "pluginwp/test-block",
 	"title": "PluginWP Test",
 	"textdomain": "pluginwp",
-	"editorScript": "file:../../../build/block-library.js",
-	"editorStyle": "file:../../../build/block-library.css",
-	"style": "file:../../../build/style-block-library.css"
+	"editorScript": "file:index.js",
+	"editorStyle": "file:index.css",
+	"style": "file:style-index.css"
 }

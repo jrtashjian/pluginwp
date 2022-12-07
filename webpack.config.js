@@ -17,16 +17,19 @@ const pluginPackages = Object.keys( dependencies )
 module.exports = {
 	...defaultConfig,
 
-	entry: pluginPackages.reduce( ( memo, packageName ) => {
-		return {
-			...memo,
-			[ packageName ]: {
-				import: `./packages/${ packageName }`,
-				library: {
-					name: [ 'pluginwp', camelCaseDash( packageName ) ],
-					type: 'window',
+	entry: {
+		...pluginPackages.reduce( ( memo, packageName ) => {
+			return {
+				...memo,
+				[ `${ packageName }/index` ]: {
+					import: `./packages/${ packageName }`,
+					library: {
+						name: [ 'pluginwp', camelCaseDash( packageName ) ],
+						type: 'window',
+					},
 				},
-			},
-		};
-	}, {} ),
+			};
+		}, {} ),
+		...defaultConfig.entry(),
+	},
 };
