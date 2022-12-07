@@ -21,6 +21,7 @@
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
         "johnpbloch/wordpress-core": "^6.0",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "wp-cli/dist-archive-command": "^2.0",
         "wp-cli/wp-cli-bundle": "^2.6",
         "wp-coding-standards/wpcs": "^2.3",
         "wp-phpunit/wp-phpunit": "^6.0",
@@ -48,6 +49,14 @@
         "format": "phpcbf --standard=phpcs.xml.dist --report-summary --report-source",
         "test": "phpunit",
         "makepot": "wp i18n make-pot . --exclude=\"node_modules,vendor\" --headers='{\"Last-Translator\":\"info@pluginwp.com\",\"Language-Team\":\"info@pluginwp.com\",\"Report-Msgid-Bugs-To\":\"https://pluginwp.com/contact\"}'",
+        "build-release": [
+            "rm -r ./vendor",
+            "@composer dump-autoload",
+            "wp dist-archive ./",
+            "@composer install"
+        ],
+        "post-install-cmd": "composer mozart-compose",
+        "post-update-cmd": "composer mozart-compose",
         "mozart-compose": [
             "\"vendor/bin/mozart\" compose",
             "composer dump-autoload",
