@@ -1,0 +1,27 @@
+{
+	"name": "@pluginwp/plugin",
+	"version": "1.0.0-prerelease",
+	"description": "PluginWP plugin package description.",
+	"author": "PluginWP Author",
+	"license": "GPL-2.0-only",
+	"keywords": [ "wordpress" ],
+	"homepage": "https://github.com/jrtashjian/pluginwp/tree/HEAD/packages/plugin/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jrtashjian/pluginwp.git",
+		"directory": "packages/plugin"
+	},
+	"bugs": {
+		"url": "https://github.com/jrtashjian/pluginwp/issues"
+	},
+	"main": "build/index.js",
+	"module": "build-module/index.js",
+	"dependencies": {
+		"@wordpress/components": "^21.0.6",
+		"@wordpress/dom-ready": "^3.17.1",
+		"@wordpress/element": "^4.15.1",
+		"@wordpress/i18n": "^4.17.1",
+		"@wordpress/interface": "^4.16.6",
+		"@wordpress/plugins": "^4.15.2"
+	}
+}
