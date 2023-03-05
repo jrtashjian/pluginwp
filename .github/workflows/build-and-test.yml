@@ -22,7 +22,7 @@ jobs:
 
       - name: Install composer dependencies
         run: |
-          composer --global require humbug/php-scoper
+          composer global require humbug/php-scoper
           echo "${HOME}/.composer/vendor/bin" >> $GITHUB_PATH
           composer run phpscoper
           composer install
