@@ -3,7 +3,7 @@
  * PHP-Scoper is a tool which essentially moves any body of code, including all
  * dependencies such as vendor directories, to a new and distinct namespace.
  *
- * @package OmniForm
+ * @package PluginWP
  */
 
 use Isolated\Symfony\Component\Finder\Finder;

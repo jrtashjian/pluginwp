@@ -7,17 +7,39 @@
 
 namespace PluginWP\Plugin;
 
-use PluginWP\ServiceProvider;
+use PluginWP\Dependencies\League\Container\ServiceProvider\AbstractServiceProvider;
+use PluginWP\Dependencies\League\Container\ServiceProvider\BootableServiceProviderInterface;
 
 /**
  * The PluginServiceProvider class.
  */
-class PluginServiceProvider extends ServiceProvider {
+class PluginServiceProvider extends AbstractServiceProvider implements BootableServiceProviderInterface {
+	/**
+	 * Get the services provided by the provider.
+	 *
+	 * @param string $id The service to check.
+	 *
+	 * @return array
+	 */
+	public function provides( string $id ): bool {
+		$services = array();
+
+		return in_array( $id, $services, true );
+	}
 
 	/**
-	 * This method will be used for hooking into WordPress with actions/filters.
+	 * Register any application services.
+	 *
+	 * @return void
 	 */
-	public function boot() {
+	public function register(): void {}
+
+	/**
+	 * Bootstrap any application services by hooking into WordPress with actions/filters.
+	 *
+	 * @return void
+	 */
+	public function boot(): void {
 		add_action( 'admin_enqueue_scripts', array( $this, 'registerScripts' ) );
 
 		add_action(
@@ -64,23 +86,24 @@ class PluginServiceProvider extends ServiceProvider {
 		remove_all_actions( 'admin_notices' );
 		remove_all_actions( 'all_admin_notices' );
 
-		$asset_loader = $this->app->makeWith(
-			Asset::class,
-			array( 'handle' => strtolower( str_replace( '\\', '-', __NAMESPACE__ ) ) )
-		);
+		$asset_loader = $this->getContainer()
+			->get( \PluginWP\Plugin\Asset::class )
+			->addArgument(
+				array( 'handle' => strtolower( str_replace( '\\', '-', __NAMESPACE__ ) ) )
+			);
 
 		$asset_loader->setPackageName( strtolower( basename( __DIR__ ) ) );
 		$asset_loader->enqueueScript();
 		$asset_loader->enqueueStyle();
 
 		$init_script = <<<JS
-		( function() {
-			window._loadPluginWP = new Promise( function( resolve ) {
-				wp.domReady( function() {
-					resolve( pluginwp.plugin.initialize( 'pluginwp', %s ) );
+			( function() {
+				window._loadPluginWP = new Promise( function( resolve ) {
+					wp.domReady( function() {
+						resolve( pluginwp.plugin.initialize( 'pluginwp', %s ) );
+					} );
 				} );
-			} );
-		} )();
+			} )();
 		JS;
 
 		$script = sprintf(

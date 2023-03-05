@@ -11,7 +11,10 @@
     "autoload": {
         "psr-4": {
             "PluginWP\\": "includes"
-        }
+        },
+        "classmap": [
+            "vendor_prefixed/"
+        ]
     },
     "require": {
         "league/container": "^4.2"

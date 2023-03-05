@@ -21,7 +21,7 @@
 				<directory suffix=".php">phpunit</directory>
 				<directory suffix=".php">vendor</directory>
 				<directory suffix=".php">vendor_prefixed</directory>
-				<directory suffix=".php">includes/Dependencies</directory>
+				<file>scoper.inc.php</file>
 			</exclude>
 		</whitelist>
 	</filter>
