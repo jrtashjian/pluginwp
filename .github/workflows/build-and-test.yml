@@ -21,7 +21,10 @@ jobs:
         run: npm install
 
       - name: Install composer dependencies
-        run: composer install
+        run: |
+          composer global require humbug/php-scoper
+          composer run phpscoper
+          composer install
 
       - name: Build the plugin
         run: npm run build
