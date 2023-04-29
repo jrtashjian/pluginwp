@@ -39,6 +39,12 @@ jobs:
           name: plugin-build-dir
           path: ./build
 
+      - name: Save vendor_prefixed dir
+        uses: actions/upload-artifact@v2
+        with:
+          name: plugin-vendor_prefixed-dir
+          path: ./vendor_prefixed
+
   lint_php:
     runs-on: ubuntu-latest
     needs: [build]
@@ -125,18 +131,16 @@ jobs:
       - name: Override PHP version in composer.json
         run: composer config platform.php ${{ matrix.php }}
 
+      - name: Download vendor_prefixed dir
+        uses: actions/download-artifact@v3
+        with:
+          name: plugin-vendor_prefixed-dir
+
       - name: Install node dependencies
         run: npm install
 
-      - name: Install PHP-Scoper
-        run: |
-          wget https://github.com/humbug/php-scoper/releases/download/0.18.2/php-scoper.phar -O /usr/local/bin/php-scoper
-          chmod +x /usr/local/bin/php-scoper
-
       - name: Install composer dependencies
-        run: |
-          composer run phpscoper
-          composer install
+        run: composer install
 
       - name: Build the plugin
         run: npm run build
