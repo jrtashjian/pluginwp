@@ -113,6 +113,9 @@ jobs:
       - name: Restore composer dependency cache
         uses: ./.github/actions/restore-composer-cache
 
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+
       ##
       # This allows Composer dependencies to be installed using a single step.
       #
@@ -126,24 +129,6 @@ jobs:
             php-version: '${{ matrix.php }}'
             ini-file: development
             coverage: none
-
-      # Ensure that Composer installs the correct versions of packages.
-      - name: Override PHP version in composer.json
-        run: composer config platform.php ${{ matrix.php }}
-
-      - name: Download vendor_prefixed dir
-        uses: actions/download-artifact@v3
-        with:
-          name: plugin-vendor_prefixed-dir
-
-      - name: Install node dependencies
-        run: npm install
-
-      - name: Install composer dependencies
-        run: composer install
-
-      - name: Build the plugin
-        run: npm run build
 
       - name: Docker debug information
         run: |
