@@ -81,15 +81,87 @@ jobs:
       - name: Linting code
         run: npm run lint-css
 
+  # From the Gutenberg project
+  # https://github.com/WordPress/gutenberg/blob/trunk/.github/workflows/unit-test.yml#L78-L187
   test_unit_php:
     runs-on: ubuntu-latest
     needs: [lint_php]
 
     strategy:
+      fail-fast: true
       matrix:
         php: [7.4, 8.0, 8.1]
         multisite: [0, 1]
 
+    env:
+      WP_ENV_PHP_VERSION: ${{ matrix.php }}
+      WP_ENV_CORE: 'https://wordpress.org/wordpress-latest.zip'
+
     steps:
-      - name: Placeholder
-        run: echo "Placeholder ${{ matrix.php }}"
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Restore npm dependency cache
+        uses: ./.github/actions/restore-npm-cache
+
+      - name: Restore composer dependency cache
+        uses: ./.github/actions/restore-composer-cache
+
+      ##
+      # This allows Composer dependencies to be installed using a single step.
+      #
+      # Since the tests are currently run within the Docker containers where the PHP version varies,
+      # the same PHP version needs to be configured for the action runner machine so that the correct
+      # dependency versions are installed and cached.
+      ##
+      - name: Set up PHP
+        uses: shivammathur/setup-php@d30ad8b1843ace22e6698ab99bbafaa747b6bd0d # v2.24.0
+        with:
+            php-version: '${{ matrix.php }}'
+            ini-file: development
+            coverage: none
+
+      - name: Install node dependencies
+        run: npm install
+
+      - name: Install PHP-Scoper
+        run: |
+          wget https://github.com/humbug/php-scoper/releases/download/0.18.2/php-scoper.phar -O /usr/local/bin/php-scoper
+          chmod +x /usr/local/bin/php-scoper
+
+      - name: Install composer dependencies
+        run: |
+          composer run phpscoper
+          composer install
+
+      - name: Build the plugin
+        run: npm run build
+
+      - name: Docker debug information
+        run: |
+            docker -v
+            docker-compose -v
+
+      - name: General debug information
+        run: |
+            npm --version
+            node --version
+            curl --version
+            git --version
+            svn --version
+            locale -a
+
+      - name: Start Docker environment
+        run: npm run wp-env start
+
+      - name: Log running Docker containers
+        run: docker ps -a
+
+      - name: Docker container debug information
+        run: |
+            npm run wp-env run tests-mysql "mysql --version"
+            npm run wp-env run tests-wordpress "php --version"
+            npm run wp-env run tests-wordpress "php -m"
+            npm run wp-env run tests-wordpress "php -i"
+            npm run wp-env run tests-wordpress "/var/www/html/wp-content/plugins/gutenberg/vendor/bin/phpunit --version"
+            npm run wp-env run tests-wordpress "locale -a"
