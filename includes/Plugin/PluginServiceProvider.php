@@ -22,7 +22,9 @@ class PluginServiceProvider extends AbstractServiceProvider implements BootableS
 	 * @return array
 	 */
 	public function provides( string $id ): bool {
-		$services = array();
+		$services = array(
+			Asset::class,
+		);
 
 		return in_array( $id, $services, true );
 	}
@@ -32,7 +34,9 @@ class PluginServiceProvider extends AbstractServiceProvider implements BootableS
 	 *
 	 * @return void
 	 */
-	public function register(): void {}
+	public function register(): void {
+		$this->getContainer()->addShared( Asset::class );
+	}
 
 	/**
 	 * Bootstrap any application services by hooking into WordPress with actions/filters.
@@ -86,11 +90,7 @@ class PluginServiceProvider extends AbstractServiceProvider implements BootableS
 		remove_all_actions( 'admin_notices' );
 		remove_all_actions( 'all_admin_notices' );
 
-		$asset_loader = $this->getContainer()
-			->get( \PluginWP\Plugin\Asset::class )
-			->addArgument(
-				array( 'handle' => strtolower( str_replace( '\\', '-', __NAMESPACE__ ) ) )
-			);
+		$asset_loader = $this->getContainer()->get( Asset::class );
 
 		$asset_loader->setPackageName( strtolower( basename( __DIR__ ) ) );
 		$asset_loader->enqueueScript();
