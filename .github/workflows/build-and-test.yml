@@ -33,7 +33,7 @@ jobs:
       - name: Build the plugin
         run: npm run build
 
-      - name: Save compiled assets
+      - name: Save build dir
         uses: actions/upload-artifact@v2
         with:
           name: plugin-build-dir
@@ -113,8 +113,17 @@ jobs:
       - name: Restore composer dependency cache
         uses: ./.github/actions/restore-composer-cache
 
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
+      - name: Download build dir
+        uses: actions/download-artifact@v2
+        with:
+          name: plugin-build-dir
+          path: ./build
+
+      - name: Download vendor_prefixed dir
+        uses: actions/download-artifact@v2
+        with:
+          name: plugin-vendor_prefixed-dir
+          path: ./vendor_prefixed
 
       ##
       # This allows Composer dependencies to be installed using a single step.
