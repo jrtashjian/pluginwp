@@ -20,8 +20,15 @@ jobs:
       - name: Install node dependencies
         run: npm install
 
+      - name: Install PHP-Scoper
+        run: |
+          wget https://github.com/humbug/php-scoper/releases/download/0.18.2/php-scoper.phar -O /usr/local/bin/php-scoper
+          chmod +x /usr/local/bin/php-scoper
+
       - name: Install composer dependencies
-        run: composer install
+        run: |
+          composer run phpscoper
+          composer install
 
       - name: Build the plugin
         run: npm run build

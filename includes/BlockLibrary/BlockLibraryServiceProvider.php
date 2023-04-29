@@ -7,16 +7,39 @@
 
 namespace PluginWP\BlockLibrary;
 
-use PluginWP\ServiceProvider;
+use PluginWP\Dependencies\League\Container\ServiceProvider\AbstractServiceProvider;
+use PluginWP\Dependencies\League\Container\ServiceProvider\BootableServiceProviderInterface;
 
 /**
  * The BlockLibraryServiceProvider class.
  */
-class BlockLibraryServiceProvider extends ServiceProvider {
+class BlockLibraryServiceProvider extends AbstractServiceProvider implements BootableServiceProviderInterface {
 	/**
-	 * This method will be used for hooking into WordPress with actions/filters.
+	 * Get the services provided by the provider.
+	 *
+	 * @param string $id The service to check.
+	 *
+	 * @return array
 	 */
-	public function boot() {
+	public function provides( string $id ): bool {
+		$services = array();
+
+		return in_array( $id, $services, true );
+	}
+
+	/**
+	 * Register any application services.
+	 *
+	 * @return void
+	 */
+	public function register(): void {}
+
+	/**
+	 * Bootstrap any application services by hooking into WordPress with actions/filters.
+	 *
+	 * @return void
+	 */
+	public function boot(): void {
 		add_action( 'init', array( $this, 'registerBlocks' ) );
 	}
 
@@ -24,11 +47,6 @@ class BlockLibraryServiceProvider extends ServiceProvider {
 	 * Register the blocks.
 	 */
 	public function registerBlocks() {
-		register_block_type( $this->app->basePath( '/build/block-library/test-block' ) );
+		register_block_type( $this->getContainer()->basePath( '/build/block-library/test-block' ) );
 	}
-
-	/**
-	 * Enqueue required scripts and styles.
-	 */
-	public function register() {}
 }

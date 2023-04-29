@@ -11,7 +11,7 @@
  * Text Domain: pluginwp
  * Domain Path: /languages
  *
- * Copyright 2019-2022 PluginWP Author
+ * Copyright 2019-2023 PluginWP Author
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,11 +52,8 @@ pluginwp()->setBasePath( __FILE__ );
 /**
  * Service Providers.
  */
-pluginwp()->register( \PluginWP\Plugin\PluginServiceProvider::class );
-pluginwp()->register( \PluginWP\BlockLibrary\BlockLibraryServiceProvider::class );
+pluginwp()->addServiceProvider( new \PluginWP\Plugin\PluginServiceProvider() );
+pluginwp()->addServiceProvider( new \PluginWP\BlockLibrary\BlockLibraryServiceProvider() );
 
 register_deactivation_hook( __FILE__, array( pluginwp(), 'deactivation' ) );
-
-// Boot the plugin.
-add_action( 'plugins_loaded', array( pluginwp(), 'boot' ) );
 add_action( 'plugins_loaded', array( pluginwp(), 'loadTextDomain' ) );
