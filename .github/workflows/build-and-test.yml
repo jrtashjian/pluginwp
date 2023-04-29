@@ -121,6 +121,10 @@ jobs:
             ini-file: development
             coverage: none
 
+      # Ensure that Composer installs the correct versions of packages.
+      - name: Override PHP version in composer.json
+        run: composer config platform.php ${{ matrix.php }}
+
       - name: Install node dependencies
         run: npm install
 
