@@ -36,7 +36,7 @@ if ( class_exists( \PluginWP\Application::class ) ) {
 	return;
 }
 
-require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 /**
  * Create and retrieve the main application container instance.
@@ -55,5 +55,7 @@ pluginwp()->set_base_path( __FILE__ );
 pluginwp()->addServiceProvider( new \PluginWP\Plugin\PluginServiceProvider() );
 pluginwp()->addServiceProvider( new \PluginWP\BlockLibrary\BlockLibraryServiceProvider() );
 
+register_activation_hook( __FILE__, array( pluginwp(), 'activation' ) );
 register_deactivation_hook( __FILE__, array( pluginwp(), 'deactivation' ) );
+
 add_action( 'plugins_loaded', array( pluginwp(), 'load_text_domain' ) );

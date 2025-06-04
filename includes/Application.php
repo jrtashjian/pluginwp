@@ -108,9 +108,19 @@ class Application extends Container {
 	}
 
 	/**
+	 * Callback for plugin activation.
+	 */
+	public function activation() {
+		do_action( 'pluginwp_activate' );
+	}
+
+
+	/**
 	 * Callback for plugin deactivation.
 	 */
-	public function deactivation() {}
+	public function deactivation() {
+		do_action( 'pluginwp_deactivate' );
+	}
 
 	/**
 	 * Load language files.
