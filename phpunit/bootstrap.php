@@ -3,6 +3,7 @@
  * PHPUnit bootstrap file
  *
  * @package PluginWP
+ *
  * @phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
  */
 

@@ -22,6 +22,11 @@
 		<exclude name="WordPress.NamingConventions" />
 		<exclude name="WordPress.PHP" />
 		<exclude name="WordPress.WhiteSpace" />
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax" />
+		<exclude name="Universal.NamingConventions" />
+		<exclude name="Universal.Operators.DisallowShortTernary" />
+		<exclude name="NormalizedArrays.Arrays.ArrayBraceSpacing" />
+		<exclude name="PSR12.Traits" />
 	</rule>
 
 </ruleset>
