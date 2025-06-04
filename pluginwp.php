@@ -44,10 +44,10 @@ require_once dirname( __FILE__ ) . '/vendor/autoload.php';
  * @return Application The application container.
  */
 function pluginwp() {
-	return \PluginWP\Application::getInstance();
+	return \PluginWP\Application::get_instance();
 }
 
-pluginwp()->setBasePath( __FILE__ );
+pluginwp()->set_base_path( __FILE__ );
 
 /**
  * Service Providers.
@@ -56,4 +56,4 @@ pluginwp()->addServiceProvider( new \PluginWP\Plugin\PluginServiceProvider() );
 pluginwp()->addServiceProvider( new \PluginWP\BlockLibrary\BlockLibraryServiceProvider() );
 
 register_deactivation_hook( __FILE__, array( pluginwp(), 'deactivation' ) );
-add_action( 'plugins_loaded', array( pluginwp(), 'loadTextDomain' ) );
+add_action( 'plugins_loaded', array( pluginwp(), 'load_text_domain' ) );

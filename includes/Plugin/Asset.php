@@ -48,7 +48,7 @@ class Asset {
 	 *
 	 * @return string
 	 */
-	public function getHandle() {
+	public function get_handle() {
 		return $this->handle;
 	}
 
@@ -57,7 +57,7 @@ class Asset {
 	 *
 	 * @param string $package_name The package slug.
 	 */
-	public function setPackageName( $package_name ) {
+	public function set_package_name( $package_name ) {
 		$this->package = $package_name;
 	}
 
@@ -69,7 +69,7 @@ class Asset {
 	 *
 	 * @return array
 	 */
-	protected function loadAssetFile( $filepath ) {
+	protected function load_asset_file( $filepath ) {
 		$default_asset_file = array(
 			'dependencies' => array(),
 			'version'      => pluginwp()->version(),
@@ -85,8 +85,8 @@ class Asset {
 	 *
 	 * @return string
 	 */
-	protected function getAssetFilePath( $filename ) {
-		return pluginwp()->basePath( 'build/' . $this->package . '/' . $filename . '.asset.php' );
+	protected function get_asset_file_path( $filename ) {
+		return pluginwp()->base_path( 'build/' . $this->package . '/' . $filename . '.asset.php' );
 	}
 
 	/**
@@ -96,8 +96,8 @@ class Asset {
 	 *
 	 * @return string
 	 */
-	protected function getAssetUrl( $filename ) {
-		return pluginwp()->baseUrl( 'build/' . $this->package . '/' . $filename );
+	protected function get_asset_url( $filename ) {
+		return pluginwp()->base_url( 'build/' . $this->package . '/' . $filename );
 	}
 
 	/**
@@ -105,9 +105,9 @@ class Asset {
 	 *
 	 * @param bool $enqueue Set the script to be enqueued or registered.
 	 */
-	protected function scriptAction( $enqueue = false ) {
-		$asset_file = $this->loadAssetFile(
-			$this->getAssetFilePath(
+	protected function script_action( $enqueue = false ) {
+		$asset_file = $this->load_asset_file(
+			$this->get_asset_file_path(
 				$this->slug
 			)
 		);
@@ -116,7 +116,7 @@ class Asset {
 
 		$func(
 			$this->handle,
-			$this->getAssetUrl( $this->slug . '.js' ),
+			$this->get_asset_url( $this->slug . '.js' ),
 			$asset_file['dependencies'],
 			$asset_file['version'],
 			true
@@ -128,9 +128,9 @@ class Asset {
 	 *
 	 * @param bool $enqueue Set the style to be enqueued or registered.
 	 */
-	protected function styleAction( $enqueue = false ) {
-		$asset_file = $this->loadAssetFile(
-			$this->getAssetFilePath(
+	protected function style_action( $enqueue = false ) {
+		$asset_file = $this->load_asset_file(
+			$this->get_asset_file_path(
 				$this->slug
 			)
 		);
@@ -139,7 +139,7 @@ class Asset {
 
 		$func(
 			$this->handle,
-			$this->getAssetUrl( 'style-' . $this->slug . '.css' ),
+			$this->get_asset_url( 'style-' . $this->slug . '.css' ),
 			array( 'wp-components' ),
 			$asset_file['version'],
 		);
@@ -148,14 +148,14 @@ class Asset {
 	/**
 	 * Enqueue a script.
 	 */
-	public function enqueueScript() {
-		$this->scriptAction( true );
+	public function enqueue_script() {
+		$this->script_action( true );
 	}
 
 	/**
 	 * Enqueue a style.
 	 */
-	public function enqueueStyle() {
-		$this->styleAction( true );
+	public function enqueue_style() {
+		$this->style_action( true );
 	}
 }

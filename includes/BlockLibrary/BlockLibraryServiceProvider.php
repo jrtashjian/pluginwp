@@ -40,13 +40,13 @@ class BlockLibraryServiceProvider extends AbstractServiceProvider implements Boo
 	 * @return void
 	 */
 	public function boot(): void {
-		add_action( 'init', array( $this, 'registerBlocks' ) );
+		add_action( 'init', array( $this, 'register_blocks' ) );
 	}
 
 	/**
 	 * Register the blocks.
 	 */
-	public function registerBlocks() {
-		register_block_type( $this->getContainer()->basePath( '/build/block-library/test-block' ) );
+	public function register_blocks() {
+		register_block_type( $this->getContainer()->base_path( '/build/block-library/test-block' ) );
 	}
 }

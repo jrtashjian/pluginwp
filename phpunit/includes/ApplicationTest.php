@@ -1,18 +1,18 @@
 <?php
 /**
- * Tests the Core class.
+ * Tests the Application class.
  *
  * @package PluginWP
  */
 
-namespace PluginWP\Tests\Core;
+namespace PluginWP\Tests\Application;
 
 use PluginWP\Application;
 
 /**
- * Tests the Core class.
+ * Tests the Application class.
  */
-class CoreTest extends \WP_UnitTestCase {
+class ApplicationTest extends \WP_UnitTestCase {
 	/**
 	 * The full path to the plugin.
 	 *
@@ -31,7 +31,7 @@ class CoreTest extends \WP_UnitTestCase {
 	 * This method is called before each test.
 	 */
 	public function set_up() {
-		$this->plugin_path = dirname( dirname( dirname( __FILE__ ) ) );
+		$this->plugin_path = dirname( dirname( __DIR__ ) );
 		$this->plugin_file = $this->plugin_path . '/' . basename( $this->plugin_path ) . '.php';
 	}
 
@@ -39,13 +39,13 @@ class CoreTest extends \WP_UnitTestCase {
 	 * Test the container's singleton.
 	 */
 	public function test_core_singleton() {
-		$application = Application::setInstance( new Application() );
+		$application = Application::set_instance( new Application() );
 
-		$this->assertSame( $application, Application::getInstance() );
+		$this->assertSame( $application, Application::get_instance() );
 
-		Application::setInstance( null );
+		Application::set_instance( null );
 
-		$application2 = Application::getInstance();
+		$application2 = Application::get_instance();
 
 		$this->assertInstanceOf( Application::class, $application2 );
 		$this->assertNotSame( $application, $application2 );
@@ -57,13 +57,13 @@ class CoreTest extends \WP_UnitTestCase {
 	public function test_core_register_path_bindings() {
 		$application = new Application();
 
-		$this->assertEmpty( $application->basePath() );
-		$this->assertEmpty( $application->baseUrl() );
+		$this->assertEmpty( $application->base_path() );
+		$this->assertEmpty( $application->base_url() );
 
-		$application->setBasePath( $this->plugin_file );
+		$application->set_base_path( $this->plugin_file );
 
-		$this->assertEquals( $this->plugin_path, $application->basePath() );
-		$this->assertEquals( site_url( '/wp-content/plugins/' . basename( $this->plugin_path ) ), $application->baseUrl() );
+		$this->assertEquals( $this->plugin_path, $application->base_path() );
+		$this->assertEquals( site_url( '/wp-content/plugins/' . basename( $this->plugin_path ) ), $application->base_url() );
 	}
 
 	/**
@@ -75,6 +75,18 @@ class CoreTest extends \WP_UnitTestCase {
 		$plugin_data = get_plugin_data( $this->plugin_file, false );
 
 		$this->assertEquals( $plugin_data['Version'], $application->version() );
+	}
+
+	/**
+	 * Test that the activation hook is called.
+	 */
+	public function test_activation_hook_is_called() {
+		$plugin_basename = plugin_basename( $this->plugin_file );
+
+		register_activation_hook( $plugin_basename, array( pluginwp(), 'activation' ) );
+		$this->assertTrue( has_filter( 'activate_' . $plugin_basename ) );
+
+		do_action( 'activate_' . $plugin_basename ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	}
 
 	/**

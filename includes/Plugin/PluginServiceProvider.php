@@ -44,7 +44,7 @@ class PluginServiceProvider extends AbstractServiceProvider implements BootableS
 	 * @return void
 	 */
 	public function boot(): void {
-		add_action( 'admin_enqueue_scripts', array( $this, 'registerScripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts' ) );
 
 		add_action(
 			'admin_menu',
@@ -77,7 +77,7 @@ class PluginServiceProvider extends AbstractServiceProvider implements BootableS
 	/**
 	 * Enqueue required scripts and styles.
 	 */
-	public function registerScripts() {
+	public function register_scripts() {
 		$current_screen = get_current_screen();
 
 		if ( 'toplevel_page_pluginwp' !== $current_screen->base ) {
@@ -92,9 +92,9 @@ class PluginServiceProvider extends AbstractServiceProvider implements BootableS
 
 		$asset_loader = $this->getContainer()->get( Asset::class );
 
-		$asset_loader->setPackageName( strtolower( basename( __DIR__ ) ) );
-		$asset_loader->enqueueScript();
-		$asset_loader->enqueueStyle();
+		$asset_loader->set_package_name( strtolower( basename( __DIR__ ) ) );
+		$asset_loader->enqueue_script();
+		$asset_loader->enqueue_style();
 
 		$init_script = <<<JS
 			( function() {
@@ -110,6 +110,6 @@ class PluginServiceProvider extends AbstractServiceProvider implements BootableS
 			$init_script,
 			wp_json_encode( array() )
 		);
-		wp_add_inline_script( $asset_loader->getHandle(), $script );
+		wp_add_inline_script( $asset_loader->get_handle(), $script );
 	}
 }
