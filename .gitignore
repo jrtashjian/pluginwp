@@ -6,9 +6,9 @@
 
 npm-debug.log
 node_modules/
-vendor/
-vendor_prefixed/
-build/
+/vendor/
+/vendor_prefixed/
+/build/
 
 phpunit/coverage/
 .phpunit.result.cache

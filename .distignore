@@ -1,12 +1,15 @@
 .*
+bin/
 composer.json
 composer.lock
 node_modules/
 package-lock.json
 package.json
 packages/
+phpcs-prefixed.xml.dist
 phpcs.xml.dist
 phpunit.xml.dist
 phpunit/
 README.md
+scoper.inc.php
 webpack.config.js

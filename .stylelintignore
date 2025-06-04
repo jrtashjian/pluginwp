@@ -3,3 +3,4 @@
 build
 vendor
 vendor_prefixed
+phpunit/coverage
