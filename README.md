@@ -4,7 +4,15 @@
 
 🚧 [**UNDER DEVELOPMENT**](https://github.com/jrtashjian/pluginwp/issues/1) 🚧
 
-This code serves as a starting point for building a WordPress plugin using React and the [block editor components](https://github.com/WordPress/gutenberg/tree/trunk/packages). I also wanted to build WordPress plugins in a more modern PHP way by introducing a portion of the [Service Container](https://laravel.com/docs/8.x/container) and [Service Providers](https://laravel.com/docs/8.x/providers) that are used in the [Laravel framework](https://laravel.com/).
+PluginWP is a modern starting point for building WordPress plugins using React and the [block editor components](https://github.com/WordPress/gutenberg/tree/trunk/packages). It brings a more maintainable and scalable approach to plugin development by introducing concepts from Laravel, such as the [Service Container](https://laravel.com/docs/8.x/container) and [Service Providers](https://laravel.com/docs/8.x/providers).
+
+## Features
+
+- Modern PHP architecture inspired by Laravel
+- React-based block editor components
+- Composer and npm support
+- Pre-configured build tools and scripts
+- Easy-to-follow structure for scalable plugin development
 
 ## Installation
 
@@ -15,44 +23,92 @@ This code serves as a starting point for building a WordPress plugin using React
 
 ### Quick Start
 
-Clone this repository or click [Use this template](https://github.com/jrtashjian/pluginwp/generate) on to create a new project on GitHub.
+**Create your plugin project:**
 
-```
+Clone this repository or click [Use this template](https://github.com/jrtashjian/pluginwp/generate) to create a new project on GitHub.
+
+```sh
 git clone https://github.com/jrtashjian/pluginwp.git yourpluginslug
+cd yourpluginslug
 ```
 
-Search for `PluginWP Author` and replace with `Actual Author Name`
-```
+**Customize plugin details:**
+
+Replace all occurrences of `PluginWP Author` with your actual author name:
+
+```sh
 find . -type f -not -path "./.git/*" -exec sed -i 's/PluginWP Author/Actual Author Name/g' {} +
 ```
 
-Search for `PluginWP` and replace with `YourPluginSlug`
-```
+Replace all occurrences of `PluginWP` with your plugin slug (e.g., `YourPluginSlug`):
+
+```sh
 find . -type f -not -path "./.git/*" -exec sed -i 's/PluginWP/YourPluginSlug/g' {} +
 ```
 
-Search for `pluginwp` and replace with `yourpluginslug`
-```
+Replace all occurrences of `pluginwp` with your lowercase plugin slug (e.g., `yourpluginslug`):
+
+```sh
 find . -type f -not -path "./.git/*" -exec sed -i 's/pluginwp/yourpluginslug/g' {} +
 ```
 
-Finally, rename the main plugin file `pluginwp.php` to `yourpluginslug.php`.
+Finally, rename the main plugin file:
 
-### Setup
-
-Install the necessary Node.js and Composer dependencies:
-
-```
-$ composer install
-$ npm install
+```sh
+mv pluginwp.php yourpluginslug.php
 ```
 
-### Available CLI commands
+## Setup
 
-- `composer lint` : checks all PHP files for syntax errors.
-- `composer format` : fixes all automatically fixable syntax errors.
-- `npm run wp-env` : exposes all commands available in [`@wordpress/env`](https://github.com/WordPress/gutenberg/tree/wp/6.0/packages/env)
-- `npm run build` : compiles all scripts and styles for distribution.
-- `npm run dev` : compiles all scripts and styles for development.
+Install the necessary dependencies:
 
-Now go build something!
+```sh
+composer install
+npm install
+```
+
+## Available CLI Commands
+
+### Composer Scripts
+
+- `composer lint` : Run PHP_CodeSniffer on all PHP files using `phpcs.xml.dist`.
+- `composer lint-prefixed` : Run PHP_CodeSniffer on prefixed vendor files using `phpcs-prefixed.xml.dist`.
+- `composer format` : Automatically fix fixable PHP coding standard issues using PHPCBF.
+- `composer test` : Run the PHPUnit test suite.
+- `composer makepot` : Generate a .pot file for translations using WP-CLI.
+- `composer build-release` : Build a distributable plugin archive.
+- `composer phpscoper` : Run PHP-Scoper to prefix vendor dependencies.
+
+### NPM Scripts
+
+- `npm run build` : Compile all scripts and styles for distribution.
+- `npm run build:analyze-bundles` : Build and analyze bundle sizes with webpack-bundle-analyzer.
+- `npm run start` : Start the development build process.
+- `npm run format:php` : Run Composer's `format` script inside the wp-env container.
+- `npm run lint:css` : Lint all SCSS files using WordPress stylelint config.
+- `npm run lint:css:fix` : Lint and automatically fix SCSS files.
+- `npm run lint:js` : Lint JavaScript files using WordPress ESLint config.
+- `npm run lint:js:fix` : Lint and automatically fix JavaScript files.
+- `npm run lint:php` : Run Composer's `lint` script inside the wp-env container.
+- `npm run lint:php:prefixed` : Run Composer's `lint-prefixed` script inside the wp-env container.
+- `npm run mailhog` : Start a MailHog SMTP testing server in Docker.
+- `npm run packages-update` : Update all @wordpress packages to the specified dist-tag.
+- `npm run test:php` : Run all PHP linting and unit tests.
+- `npm run test:unit:php:coverage` : Run PHPUnit with code coverage report.
+- `npm run test:unit:php:setup` : Start wp-env with Xdebug for code coverage.
+- `npm run test:unit:php` : Run PHPUnit setup and then the test suite.
+- `npm run wp-env` : Start and manage the local WordPress environment using @wordpress/env.
+- `npm run version` : Update version numbers and stage changes for commit.
+
+For more details, see the `scripts` section in `composer.json` and `package.json`.
+
+## Contributing
+
+Contributions are welcome! Please open issues or submit pull requests to help improve this project.
+
+## License
+This project is open source and available under the [GNU General Public License v2.0 or later (GPL-2.0+)](LICENSE).
+
+---
+
+Now go build something awesome! 🚀
