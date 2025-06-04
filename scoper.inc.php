@@ -24,7 +24,7 @@ return array(
 
 	// The base output directory for the prefixed files.
 	// This will be overridden by the 'output-dir' command line option if present.
-	'output-dir' => 'includes/Dependencies',
+	'output-dir' => 'vendor_prefixed',
 
 	// By default when running php-scoper add-prefix, it will prefix all relevant code found in the current working
 	// directory. You can however define which files should be scoped by defining a collection of Finders in the
@@ -56,5 +56,19 @@ return array(
 				)
 			)
 			->in( 'vendor' ),
+	),
+
+	'patchers'   => array(
+		function ( $file_path, $prefix, $content ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter
+
+			// ERROR date() is affected by runtime timezone changes which can cause date/time to be incorrectly displayed. Use gmdate() instead. (WordPress.DateTime.RestrictedFunctions.date_date).
+			$content = preg_replace(
+				'/(\W)date([\(;])/',
+				'$1gmdate$2',
+				$content
+			);
+
+			return $content;
+		},
 	),
 );
