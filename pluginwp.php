@@ -3,7 +3,7 @@
  * Plugin Name: PluginWP
  * Plugin URI: https://pluginwp.com
  * Description: PluginWP Plugin Description.
- * Version: 1.0.0
+ * Version: 0.0.1
  * Requires at least: 6.0
  * Requires PHP: 7.4
  * Author: PluginWP Author
