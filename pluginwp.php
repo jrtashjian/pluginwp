@@ -4,14 +4,14 @@
  * Plugin URI: https://pluginwp.com
  * Description: PluginWP Plugin Description.
  * Version: 0.0.1
- * Requires at least: 6.0
+ * Requires at least: 6.9
  * Requires PHP: 7.4
  * Author: PluginWP Author
  * Author URI: https://pluginwp.com
  * Text Domain: pluginwp
  * Domain Path: /languages
  *
- * Copyright 2019-2023 PluginWP Author
+ * Copyright 2019-2026 PluginWP Author
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
