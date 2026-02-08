@@ -96,7 +96,7 @@ class PluginServiceProvider extends AbstractServiceProvider implements BootableS
 		$asset_loader->enqueue_script();
 		$asset_loader->enqueue_style();
 
-		$init_script = <<<JS
+		$init_script = <<<'JS'
 			( function() {
 				window._loadPluginWP = new Promise( function( resolve ) {
 					wp.domReady( function() {
