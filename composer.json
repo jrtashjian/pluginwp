@@ -18,19 +18,19 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "PluginWP\\Tests\\": "phpunit/includes"
+            "PluginWP\\Tests\\Unit\\": "phpunit/unit"
         }
     },
     "require": {
         "league/container": "^4.2"
     },
     "require-dev": {
+        "10up/wp_mock": "^1.0",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
-        "johnpbloch/wordpress-core": "^6.1",
+        "johnpbloch/wordpress-core": "^6.9",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
         "wp-cli/wp-cli-bundle": "^2.6",
         "wp-coding-standards/wpcs": "^3.0",
-        "wp-phpunit/wp-phpunit": "^6.1",
         "yoast/phpunit-polyfills": "^1.0"
     },
     "config": {
@@ -43,6 +43,7 @@
         "sort-packages": true
     },
     "scripts": {
+        "pre-autoload-dump": "mkdir -p vendor_prefixed",
         "lint": "phpcs --standard=phpcs.xml.dist",
         "lint-prefixed": "phpcs --standard=phpcs-prefixed.xml.dist",
         "format": "phpcbf --standard=phpcs.xml.dist --report-summary --report-source",
@@ -59,7 +60,7 @@
             "@composer install --no-autoloader --no-dev --prefer-dist",
             "php-scoper add-prefix --force",
             "rm -rf ./vendor",
-            "@composer dump-autoload --optimize"
+            "@composer dump-autoload --optimize --classmap-authoritative"
         ]
     }
 }
