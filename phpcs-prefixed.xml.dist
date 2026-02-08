@@ -12,12 +12,8 @@
 	<rule ref="WordPress-Core">
 		<exclude name="Generic" />
 		<exclude name="PEAR.Functions.FunctionCallSignature" />
-		<exclude name="PHPCompatibility.Interfaces" />
 		<exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing" />
-		<exclude name="Squiz.PHP.DisallowMultipleAssignments" />
-		<exclude name="Squiz.Strings.DoubleQuoteUsage" />
 		<exclude name="WordPress.Arrays" />
-		<exclude name="WordPress.CodeAnalysis" />
 		<exclude name="WordPress.Files.FileName"/>
 		<exclude name="WordPress.NamingConventions" />
 		<exclude name="WordPress.PHP" />
