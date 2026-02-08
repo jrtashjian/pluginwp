@@ -6,14 +6,7 @@
  * @package PluginWP
  */
 
-use Isolated\Symfony\Component\Finder\Finder;
-
-// You can do your own things here, e.g. collecting symbols to expose dynamically
-// or files to exclude.
-// However beware that this file is executed by PHP-Scoper, hence if you are using
-// the PHAR it will be loaded by the PHAR. So it is highly recommended to avoid
-// to auto-load any code here: it can result in a conflict or even corrupt
-// the PHP-Scoper analysis.
+use Symfony\Component\Finder\Finder;
 
 return array(
 	// The prefix configuration. If a non-null value is used, a random prefix
@@ -38,7 +31,7 @@ return array(
 			->notName(
 				array(
 					'README.md',
-					'/.*\\.dist/',
+					'/\.dist/',
 					'Makefile',
 					'composer.json',
 					'composer.lock',
