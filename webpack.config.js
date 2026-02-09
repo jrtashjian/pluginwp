@@ -1,18 +1,30 @@
+const fs = require( 'fs' );
+const path = require( 'path' );
+
 /**
  * WordPress dependencies.
  */
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 const { camelCaseDash } = require( '@wordpress/dependency-extraction-webpack-plugin/lib/util' );
 
-/**
- * Internal dependencies.
- */
-const { dependencies } = require( './package' );
-const PLUGIN_NAMESPACE = '@pluginwp/';
+const PACKAGES_DIR = path.resolve( __dirname, 'packages' );
 
-const pluginPackages = Object.keys( dependencies )
-	.filter( ( packageName ) => packageName.startsWith( PLUGIN_NAMESPACE ) )
-	.map( ( packageName ) => packageName.replace( PLUGIN_NAMESPACE, '' ) );
+/**
+ * Retrieves an array of plugin package names from the packages directory.
+ * Filters for directories that contain an index.js file.
+ *
+ * @type {string[]}
+ */
+const pluginPackages = fs
+	.readdirSync( PACKAGES_DIR )
+	.filter( ( packageName ) => {
+		const packagePath = path.join( PACKAGES_DIR, packageName );
+		const indexPath = path.join( packagePath, 'index.js' );
+		return (
+			fs.statSync( packagePath ).isDirectory() &&
+			fs.existsSync( indexPath )
+		);
+	} );
 
 module.exports = {
 	...defaultConfig,
