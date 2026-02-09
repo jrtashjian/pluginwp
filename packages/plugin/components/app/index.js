@@ -19,26 +19,28 @@ import ExampleSlotFill from '../example-slot-fill';
 
 export default function App( { settings } ) {
 	return (
-		<SlotFillProvider>
-			<FullscreenMode isActive={ false } />
-			<InterfaceSkeleton
-				content={ (
-					<div style={ { padding: '1rem' } }>
-						<h1>{ __( 'PluginWP', 'pluginwp' ) }</h1>
+		<div className="pluginwp__container">
+			<SlotFillProvider>
+				<FullscreenMode isActive={ false } />
+				<InterfaceSkeleton
+					content={ (
+						<div style={ { padding: '1rem' } }>
+							<h1>{ __( 'PluginWP', 'pluginwp' ) }</h1>
 
-						<pre style={ { margin: '0' } }>
-							{ __( 'Initial Settings', 'pluginwp' ) }:<br />
-							{ JSON.stringify( settings, null, 2 ) }
-						</pre>
+							<pre style={ { margin: '0' } }>
+								{ __( 'Initial Settings', 'pluginwp' ) }:<br />
+								{ JSON.stringify( settings, null, 2 ) }
+							</pre>
 
-						<pre><strong>&lt;ExampleSlotFill.Slot&gt;</strong> --------------------</pre>
-						<ExampleSlotFill.Slot />
-						<pre><strong>&lt;/ExampleSlotFill.Slot&gt;</strong> --------------------</pre>
-					</div>
-				) }
-			/>
-			<PluginArea scope="pluginwp" />
-			<Popover.Slot />
-		</SlotFillProvider>
+							<pre><strong>&lt;ExampleSlotFill.Slot&gt;</strong> --------------------</pre>
+							<ExampleSlotFill.Slot />
+							<pre><strong>&lt;/ExampleSlotFill.Slot&gt;</strong> --------------------</pre>
+						</div>
+					) }
+				/>
+				<PluginArea scope="pluginwp" />
+				<Popover.Slot />
+			</SlotFillProvider>
+		</div>
 	);
 }

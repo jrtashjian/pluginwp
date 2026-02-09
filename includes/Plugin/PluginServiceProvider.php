@@ -56,7 +56,7 @@ class PluginServiceProvider extends AbstractServiceProvider implements BootableS
 					'pluginwp',
 					function () {
 						?>
-						<div id="pluginwp" class="hide-if-no-js"></div>
+						<div id="pluginwp" class="pluginwp hide-if-no-js"></div>
 
 						<?php // JavaScript is disabled. ?>
 						<div class="wrap hide-if-js">
