@@ -4,11 +4,13 @@
 
 🚧 [**UNDER DEVELOPMENT**](https://github.com/jrtashjian/pluginwp/issues/1) 🚧
 
-PluginWP is a modern starting point for building WordPress plugins using React and the [block editor components](https://github.com/WordPress/gutenberg/tree/trunk/packages). It brings a more maintainable and scalable approach to plugin development by introducing concepts from Laravel, such as the [Service Container](https://laravel.com/docs/8.x/container) and [Service Providers](https://laravel.com/docs/8.x/providers).
+PluginWP is a modern starting point for building WordPress plugins using React and the [block editor components](https://github.com/WordPress/gutenberg/tree/trunk/packages). It brings a more maintainable and scalable approach to plugin development by leveraging [The PHP League's Container](https://container.thephpleague.com/) with Service Provider support.
 
 ## Features
 
 - Modern PHP architecture inspired by Laravel
+- Dependency injection via The PHP League's Container
+- Service Provider architecture for modular bootstrapping
 - React-based block editor components
 - Composer and npm support
 - Pre-configured build tools and scripts
@@ -20,6 +22,7 @@ PluginWP is a modern starting point for building WordPress plugins using React a
 
 - [Node.js](https://nodejs.org)
 - [Composer](https://getcomposer.org)
+- [PHP Scoper](https://github.com/humbug/php-scoper) (for prefixing vendor dependencies)
 
 ### Quick Start
 
