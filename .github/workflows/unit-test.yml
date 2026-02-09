@@ -1,0 +1,38 @@
+name: Unit Tests
+
+on: push
+
+jobs:
+  test-php:
+    name: PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php:
+          - "7.4"
+          - "8.2"
+          - "8.3"
+          - "8.4"
+          - "8.5"
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install PHP-Scoper
+        run: composer global require humbug/php-scoper
+
+      - name: Add Composer bin to PATH
+        run: echo "$HOME/.composer/vendor/bin/" >> $GITHUB_PATH
+
+      - name: Run PHP-Scoper
+        run: composer run phpscoper
+
+      - name: Install composer dependencies
+        run: composer install
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Run unit tests
+        run: composer test
