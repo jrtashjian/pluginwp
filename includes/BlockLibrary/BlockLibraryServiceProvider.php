@@ -56,6 +56,8 @@ class BlockLibraryServiceProvider extends AbstractServiceProvider implements Boo
 
 	/**
 	 * Register the blocks.
+	 *
+	 * @throws \Exception When block path does not exist.
 	 */
 	public function register_blocks() {
 		foreach ( $this->get_blocks() as $block_name ) {
