@@ -1,4 +1,5 @@
-@import "~@wordpress/base-styles/variables";
-@import "~@wordpress/base-styles/mixins";
-@import "~@wordpress/base-styles/breakpoints";
-@import "~@wordpress/interface/src/style";
+@use "@wordpress/base-styles/mixins" as *;
+
+body.js.toplevel_page_pluginwp {
+    @include wp-admin-reset("#pluginwp");
+}
