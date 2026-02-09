@@ -44,9 +44,28 @@ class BlockLibraryServiceProvider extends AbstractServiceProvider implements Boo
 	}
 
 	/**
+	 * Get the list of block names to register.
+	 *
+	 * @return array
+	 */
+	protected function get_blocks(): array {
+		return array(
+			'test-block',
+		);
+	}
+
+	/**
 	 * Register the blocks.
 	 */
 	public function register_blocks() {
-		register_block_type( $this->getContainer()->base_path( '/build/block-library/test-block' ) );
+		foreach ( $this->get_blocks() as $block_name ) {
+			$block_path = $this->getContainer()->base_path( '/build/block-library/' . $block_name );
+
+			if ( ! is_dir( $block_path ) ) {
+				throw new \Exception( 'Block path does not exist: ' . esc_html( $block_path ) );
+			}
+
+			register_block_type( $block_path );
+		}
 	}
 }
