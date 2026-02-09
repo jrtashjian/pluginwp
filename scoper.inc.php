@@ -6,7 +6,7 @@
  * @package PluginWP
  */
 
-use Symfony\Component\Finder\Finder;
+use Isolated\Symfony\Component\Finder\Finder;
 
 return array(
 	// The prefix configuration. If a non-null value is used, a random prefix
