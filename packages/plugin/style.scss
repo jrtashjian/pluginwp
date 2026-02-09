@@ -3,14 +3,17 @@
 @use "@wordpress/base-styles/breakpoints" as *;
 
 body.js.toplevel_page_pluginwp {
+
     @include wp-admin-reset(".pluginwp");
 }
 
 .pluginwp {
+
     @include reset;
 }
 
 .pluginwp__container {
+
     @include break-small {
 		position: absolute;
 		top: 0;
