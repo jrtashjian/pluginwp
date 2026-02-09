@@ -1,4 +1,4 @@
-[![Build and Test](https://github.com/jrtashjian/pluginwp/actions/workflows/build-and-test.yml/badge.svg?branch=master)](https://github.com/jrtashjian/pluginwp/actions/workflows/build-and-test.yml)
+[![Static Analysis](https://github.com/jrtashjian/pluginwp/actions/workflows/static-analysis.yml/badge.svg?branch=master)](https://github.com/jrtashjian/pluginwp/actions/workflows/static-analysis.yml) [![Unit Tests](https://github.com/jrtashjian/pluginwp/actions/workflows/unit-test.yml/badge.svg?branch=master)](https://github.com/jrtashjian/pluginwp/actions/workflows/unit-test.yml)
 
 # PluginWP Foundation
 
