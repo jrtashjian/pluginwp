@@ -36,7 +36,8 @@
 		"@wordpress/data": "^10.33.1",
 		"@wordpress/dom-ready": "^4.33.1",
 		"@wordpress/element": "^6.33.1",
-		"@wordpress/i18n": "^6.6.1"
+		"@wordpress/i18n": "^6.6.1",
+		"react-router-dom": "^7.13.0"
 	},
 	"devDependencies": {
 		"@wordpress/env": "^10.33.1",
