@@ -78,9 +78,13 @@ class PluginServiceProvider extends AbstractServiceProvider implements BootableS
 	 * Enqueue required scripts and styles.
 	 */
 	public function register_scripts() {
-		$current_screen = get_current_screen();
+		/** @var \PluginWP\Application */ // phpcs:ignore
+		$container = $this->getContainer();
 
-		if ( 'toplevel_page_pluginwp' !== $current_screen->base ) {
+		$current_screen = get_current_screen();
+		$plugin_slug    = basename( $container->base_path() );
+
+		if ( "toplevel_page_{$plugin_slug}" !== $current_screen->base ) {
 			return;
 		}
 
@@ -100,7 +104,7 @@ class PluginServiceProvider extends AbstractServiceProvider implements BootableS
 			( function() {
 				window._loadPluginWP = new Promise( function( resolve ) {
 					wp.domReady( function() {
-						resolve( pluginwp.plugin.initialize( 'pluginwp', %s ) );
+						resolve( %1$s.plugin.initialize( '%1$s', %2$s ) );
 					} );
 				} );
 			} )();
@@ -108,7 +112,8 @@ class PluginServiceProvider extends AbstractServiceProvider implements BootableS
 
 		$script = sprintf(
 			$init_script,
-			wp_json_encode( array() )
+			esc_js( $plugin_slug ),
+			esc_js( wp_json_encode( array() ) )
 		);
 		wp_add_inline_script( $asset_loader->get_handle(), $script );
 	}
