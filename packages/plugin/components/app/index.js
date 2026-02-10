@@ -3,44 +3,29 @@
  */
 import { __ } from '@wordpress/i18n';
 import {
-	Popover,
-	SlotFillProvider,
+	__experimentalVStack as VStack,
+	__experimentalText as Text,
 } from '@wordpress/components';
-import { PluginArea } from '@wordpress/plugins';
-import {
-	FullscreenMode,
-	InterfaceSkeleton,
-} from '@wordpress/interface';
+import { Page } from '@wordpress/admin-ui';
 
 /**
  * Internal dependencies
  */
-import ExampleSlotFill from '../example-slot-fill';
 
 export default function App( { settings } ) {
 	return (
 		<div className="pluginwp__container">
-			<SlotFillProvider>
-				<FullscreenMode isActive={ false } />
-				<InterfaceSkeleton
-					content={ (
-						<div style={ { padding: '1rem' } }>
-							<h1>{ __( 'PluginWP', 'pluginwp' ) }</h1>
-
-							<pre style={ { margin: '0' } }>
-								{ __( 'Initial Settings', 'pluginwp' ) }:<br />
-								{ JSON.stringify( settings, null, 2 ) }
-							</pre>
-
-							<pre><strong>&lt;ExampleSlotFill.Slot&gt;</strong> --------------------</pre>
-							<ExampleSlotFill.Slot />
-							<pre><strong>&lt;/ExampleSlotFill.Slot&gt;</strong> --------------------</pre>
-						</div>
-					) }
-				/>
-				<PluginArea scope="pluginwp" />
-				<Popover.Slot />
-			</SlotFillProvider>
+			<div className="pluginwp__layout">
+				<Page title={ __( 'PluginWP', 'pluginwp' ) } hasPadding>
+					<VStack>
+						<Text>{ __( 'Welcome to PluginWP!', 'pluginwp' ) }</Text>
+						<Text>{ __( 'Initial Settings', 'pluginwp' ) }</Text>
+						<pre style={ { margin: '0' } }>
+							{ JSON.stringify( settings, null, 2 ) }
+						</pre>
+					</VStack>
+				</Page>
+			</div>
 		</div>
 	);
 }

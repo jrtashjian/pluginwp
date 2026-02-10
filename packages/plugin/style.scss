@@ -1,6 +1,7 @@
 @use "@wordpress/base-styles/mixins" as *;
 @use "@wordpress/base-styles/variables" as *;
 @use "@wordpress/base-styles/breakpoints" as *;
+@import "@wordpress/admin-ui/build-style/style.css";
 
 body.js.toplevel_page_pluginwp {
 
@@ -13,6 +14,8 @@ body.js.toplevel_page_pluginwp {
 }
 
 .pluginwp__container {
+
+	background-color: #1d2327; // default admin theme background
 
     @include break-small {
 		position: absolute;
@@ -31,3 +34,56 @@ body.js.toplevel_page_pluginwp {
 		}
 	}
 }
+
+.admin-color-light .pluginwp__container {
+	background-color: #e5e5e5;
+}
+
+.admin-color-modern .pluginwp__container {
+	background-color: #1e1e1e;
+}
+
+.admin-color-blue .pluginwp__container {
+	background-color: #52accc;
+}
+
+.admin-color-coffee .pluginwp__container {
+	background-color: #59524c;
+}
+
+.admin-color-ectoplasm .pluginwp__container {
+	background-color: #523f6d;
+}
+
+.admin-color-midnight .pluginwp__container {
+	background-color: #363b3f;
+}
+
+.admin-color-ocean .pluginwp__container {
+	background-color: #738e96;
+}
+
+.admin-color-sunrise .pluginwp__container {
+	background-color: #cf4944;
+}
+
+.pluginwp__layout {
+	height: auto;
+	max-height: 100%;
+
+	position: fixed;
+	top: $admin-bar-height-big;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	border-radius: 8px;
+	margin: 0 16px 16px 0;
+	overflow: hidden;
+
+	@media (min-width: #{ ($break-medium + 1) }) {
+		top: $admin-bar-height;
+	}
+}
+
+@include editor-left('.pluginwp__layout');
