@@ -2,14 +2,13 @@
  * WordPress dependencies.
  */
 import '@wordpress/dom-ready';
-import { createRoot } from '@wordpress/element';
+import { createRoot, StrictMode } from '@wordpress/element';
 
 /**
  * Internal dependencies.
  */
 import App from './components/app';
 import './style.scss';
-import './test-plugin';
 
 /**
  * Initializes and returns and instance of PluginWP.
@@ -21,6 +20,10 @@ export function initialize( id, settings ) {
 	const target = document.getElementById( id );
 	const root = createRoot( target );
 
-	root.render( <App settings={ settings } /> );
+	root.render(
+		<StrictMode>
+			<App settings={ settings } />
+		</StrictMode>
+	);
 	return root;
 }
