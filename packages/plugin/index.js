@@ -1,3 +1,5 @@
+import { HashRouter } from 'react-router-dom';
+
 /**
  * WordPress dependencies.
  */
@@ -22,7 +24,9 @@ export function initialize( id, settings ) {
 
 	root.render(
 		<StrictMode>
-			<App settings={ settings } />
+			<HashRouter>
+				<App settings={ settings } />
+			</HashRouter>
 		</StrictMode>
 	);
 	return root;

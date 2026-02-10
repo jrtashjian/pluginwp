@@ -70,6 +70,30 @@ class PluginServiceProvider extends AbstractServiceProvider implements BootableS
 					'',
 					2
 				);
+
+				add_submenu_page(
+					'pluginwp',
+					esc_html__( 'Dashboard', 'pluginwp' ),
+					esc_html__( 'Dashboard', 'pluginwp' ),
+					'manage_options',
+					'pluginwp',
+				);
+
+				add_submenu_page(
+					'pluginwp',
+					esc_html__( 'Page One', 'pluginwp' ),
+					esc_html__( 'Page One', 'pluginwp' ),
+					'manage_options',
+					'admin.php?page=pluginwp#/page-one',
+				);
+
+				add_submenu_page(
+					'pluginwp',
+					esc_html__( 'Page Two', 'pluginwp' ),
+					esc_html__( 'Page Two', 'pluginwp' ),
+					'manage_options',
+					'admin.php?page=pluginwp#/page-two',
+				);
 			}
 		);
 	}
